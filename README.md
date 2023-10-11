@@ -1,2 +1,2 @@
 # docbot
-docbot using LLM
+document bot using LLM
