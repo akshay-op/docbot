@@ -5,3 +5,4 @@ Author: op
 Requires-Dist: pandas
 Requires-Dist: numpy
 Requires-Dist: langchain
+Requires-Dist: pypdf

@@ -5,3 +5,13 @@ datascience_project.egg-info/SOURCES.txt
 datascience_project.egg-info/dependency_links.txt
 datascience_project.egg-info/requires.txt
 datascience_project.egg-info/top_level.txt
+src/__init__.py
+src/exception.py
+src/logger.py
+src/utils.py
+src/components/__init__.py
+src/components/data_read.py
+src/components/model.py
+src/pipeline/__init__.py
+src/pipeline/predict.py
+src/pipeline/train.py
