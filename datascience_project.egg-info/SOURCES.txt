@@ -8,8 +8,11 @@ datascience_project.egg-info/top_level.txt
 src/__init__.py
 src/exception.py
 src/logger.py
+src/qa_tool.py
+src/style.py
 src/utils.py
 src/components/__init__.py
+src/components/copied1.py
 src/components/data_read.py
 src/components/model.py
 src/pipeline/__init__.py
