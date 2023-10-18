@@ -3,13 +3,15 @@ import sys
 sys.path.insert(0, 'C:\\Users\\USER\\Documents\\python projects\\docbot')
 from src.logger import logging
 from src.exception import CustomException
+from src.model import LLMmodel
 import pandas as pd
 from langchain import document_loaders as dl
 import streamlit as st
+from PyPDF2 import PdfReader
 
 class DataRead:
     def __init__(self):
-        # self.datapath = "data/tatasample.pdf"
+        # self.datapath = "./data/tatasample.pdf"
         self.datapath = None
         self.output_dir = "data/"
     
@@ -21,10 +23,15 @@ class DataRead:
 
         logging.info("Data reading initiated")
         try:
-            data = dl.PyPDFLoader(self.datapath)
-            self.document = data.load()
+            pdf_readed = PdfReader(self.datapath)
+            document_text = ""
+            
+            for page in pdf_readed.pages:
+                document_text+= page.extract_text()
+                type_doc = "TXT"
+                
             logging.info("Data read completed.")
-            return self.document
+            return document_text
         except Exception as e:
             logging.info("Data read failed.")
             raise CustomException(e, sys)
@@ -44,6 +51,7 @@ if __name__=="__main__":
     st.write("Upload a PDF file to read its content.")
 
     obj = DataRead()
+    
 
     uploaded_file = st.file_uploader("Upload a PDF file", type=["pdf"])
 
@@ -53,10 +61,19 @@ if __name__=="__main__":
             f.write(uploaded_file.read())
         obj.datapath = "temp.pdf"
         document = obj.getdata()
+        
+
+        llm_model_instance = LLMmodel(document)
+
+
+        splited_data = llm_model_instance.split(split_type="CHARACTER", chunk_size=200, chunk_overlap=10)
+
         if document:
             st.success("Data read successfully.")
             st.write("PDF Content:")
             st.write(document)
+            st.write("after split")
+            st.write(splited_data)
             # obj.save_document(document,'temp.pdf')
             
     
