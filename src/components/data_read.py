@@ -66,14 +66,14 @@ if __name__=="__main__":
         llm_model_instance = LLMmodel(document)
 
 
-        splited_data = llm_model_instance.split(split_type="CHARACTER", chunk_size=200, chunk_overlap=10)
+        # splited_data = llm_model_instance.split(split_type="CHARACTER", chunk_size=200, chunk_overlap=10)
 
         if document:
             st.success("Data read successfully.")
             st.write("PDF Content:")
             st.write(document)
             st.write("after split")
-            st.write(splited_data)
+            st.write(llm_model_instance)
             # obj.save_document(document,'temp.pdf')
             
     

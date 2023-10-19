@@ -38,5 +38,49 @@ class LLMmodel(object):
     
         return document_splited
     
+    def embedding(self, embedding_type="HF", OPENAI_KEY=None):
 
+        try:
+            if not self.embedding_model:
+                embedding_type = "HF"
+                if embedding_type == "HF":
+                    self.embedding_model = embeddings.HuggingFaceEmbeddings()
+                self.embedding_type = embedding_type
+                logging.info("Embedding Finished.")
+        except Exception as error:
+            logging.info("Embedding failed ,e:",error)
+            raise CustomException(error, sys)
         
+        return self.embedding_model
+    
+    def get_storage(self, vectorstore_type = "FAISS", embedding_type="HF", OPENAI_KEY=None):
+
+        self.embedding_type = "HF"
+        vectorstore_type = "FAISS"
+
+        self.embedding(embedding_type=self.embedding_type, OPENAI_KEY=OPENAI_KEY)
+
+        if vectorstore_type == "FAISS":
+            model_vectorstore = vs.FAISS
+
+        if self.data_text:
+            try:
+                self.db = model_vectorstore.from_texts(self.document_splited, self.embedding_model)
+            except Exception as error:
+                print(f"Error in storage data text step: {error}")
+                self.db = None
+
+        return self.db
+
+    def search(self, question, with_score=False):
+        relevant_docs = None
+
+        if self.db and "SVM" not in str(type(self.db)):
+            relevant_docs = self.db.similarity_search(question)
+        elif self.db:
+            relevant_docs = self.db.get_relevant_documents(question)
+        
+        return relevant_docs
+
+
+    
