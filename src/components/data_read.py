@@ -9,6 +9,10 @@ from langchain import document_loaders as dl
 import streamlit as st
 from PyPDF2 import PdfReader
 
+st.set_page_config(initial_sidebar_state="collapsed")
+from streamlit_extras.stylable_container import *
+from streamlit_extras.switch_page_button import switch_page
+
 class DataRead:
     def __init__(self):
         # self.datapath = "./data/tatasample.pdf"
@@ -75,6 +79,9 @@ if __name__=="__main__":
             st.write("after split")
             st.write(llm_model_instance)
             # obj.save_document(document,'temp.pdf')
+
+            if st.button("Go to Data Ask Page"):
+                switch_page("data_ask")
             
     
     # Remove the temporary file
