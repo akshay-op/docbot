@@ -14,8 +14,8 @@ from src.exception import CustomException
 class LLMmodel(object):
     def __init__(self,data):
         self.document = data
-
-        # self.HF_API_TOKEN = HF_API_TOKEN
+        self.repo_id = 'declare-lab/flan-alpaca-large'
+        
         
     def split(self, split_type="character", chunk_size=200, chunk_overlap=10):
   
@@ -38,27 +38,25 @@ class LLMmodel(object):
     
         return document_splited
     
-    def embedding(self, embedding_type="HF", OPENAI_KEY=None):
+    def embedding(self, embedding_type="HF"):
 
         try:
-            if not self.embedding_model:
-                embedding_type = "HF"
-                if embedding_type == "HF":
-                    self.embedding_model = embeddings.HuggingFaceEmbeddings()
-                self.embedding_type = embedding_type
-                logging.info("Embedding Finished.")
+ 
+            self.embedding_model = embeddings.HuggingFaceEmbeddings()
+            self.embedding_type = embedding_type
+            logging.info("Embedding Finished.")
         except Exception as error:
             logging.info("Embedding failed ,e:",error)
             raise CustomException(error, sys)
         
         return self.embedding_model
     
-    def storage(self, vectorstore_type = "FAISS", embedding_type="HF", OPENAI_KEY=None):
+    def storage(self, vectorstore_type = "FAISS", embedding_type="HF"):
 
         self.embedding_type = "HF"
         vectorstore_type = "FAISS"
 
-        self.embedding(embedding_type=self.embedding_type, OPENAI_KEY=OPENAI_KEY)
+        self.embedding(embedding_type=self.embedding_type)
 
         if vectorstore_type == "FAISS":
             model_vectorstore = vs.FAISS
@@ -134,18 +132,14 @@ class LLMmodel(object):
         
     
     def create_db_document(self, 
-                            data_source_type="TXT",
                             split_type="token",
                             chunk_size=200,
                             embedding_type="HF",
                             chunk_overlap=10,
-                            OPENAI_KEY=None,
                             vectorstore_type = "FAISS"):
             
-            
-            self.get_document(data_source_type=data_source_type)
             self.split(split_type=split_type, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-            db = self.storage(vectorstore_type=vectorstore_type, embedding_type=embedding_type, OPENAI_KEY=OPENAI_KEY)
+            db = self.storage(vectorstore_type=vectorstore_type, embedding_type=embedding_type)
         
             return db
 

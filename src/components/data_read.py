@@ -68,6 +68,12 @@ if __name__=="__main__":
         
 
         llm_model_instance = LLMmodel(document)
+        st.session_state['LLMmodel'] = llm_model_instance
+        db = llm_model_instance.create_db_document(split_type="character",
+                                                    embedding_type='HF',
+                                                    vectorstore_type='FAISS',
+                                                                   )
+        st.session_state["db"] = db
 
 
         # splited_data = llm_model_instance.split(split_type="CHARACTER", chunk_size=200, chunk_overlap=10)
