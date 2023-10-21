@@ -74,6 +74,7 @@ if __name__=="__main__":
                                                     vectorstore_type='FAISS',
                                                                    )
         st.session_state["db"] = db
+        st.session_state['repoid'] = "declare-lab/flan-alpaca-large"
 
 
         # splited_data = llm_model_instance.split(split_type="CHARACTER", chunk_size=200, chunk_overlap=10)

@@ -27,8 +27,8 @@ def main():
                                     value="Ask me about the document")
        
             if st.button("ASK"):
-                    object_LLMmodel = st.session_state["LLMmodel_object"]
-                    response = object_LLMmodel.question(user_input, repo_id=st.session_state["settings"]["repo_id"])
+                    object_LLMmodel = st.session_state["LLMmodel"]
+                    response = object_LLMmodel.question(user_input, repo_id=st.session_state["repoid"])
                     st.session_state.past.append(user_input)
                     st.session_state.generated.append(response)
 

@@ -10,3 +10,5 @@ Requires-Dist: streamlit
 Requires-Dist: streamlit-extras
 Requires-Dist: PyPDF2
 Requires-Dist: streamlit_autorefresh
+Requires-Dist: sentence-transformers
+Requires-Dist: faiss-cpu

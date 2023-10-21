@@ -6,5 +6,7 @@ streamlit
 streamlit-extras
 PyPDF2
 streamlit_autorefresh
+sentence-transformers
+faiss-cpu
 
 -e .
