@@ -8,5 +8,8 @@ PyPDF2
 streamlit_autorefresh
 sentence-transformers
 faiss-cpu
+python-dotenv
+streamlit-scrollable-textbox
+
 
 -e .

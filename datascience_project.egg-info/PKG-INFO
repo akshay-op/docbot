@@ -12,3 +12,5 @@ Requires-Dist: PyPDF2
 Requires-Dist: streamlit_autorefresh
 Requires-Dist: sentence-transformers
 Requires-Dist: faiss-cpu
+Requires-Dist: python-dotenv
+Requires-Dist: streamlit-scrollable-textbox

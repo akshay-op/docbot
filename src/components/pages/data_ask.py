@@ -1,10 +1,10 @@
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
-from streamlit_extras.let_it_rain import rain
+import streamlit_scrollable_textbox as stx
 
 def main():
     st.set_page_config(layout="wide", page_title="Chat page")
-    st.title("Data Ask Page")
+    st.title("Data Chat Page")
     st.write("Welcome to the Data bot, Chat with the doc here.")
 
     chatcolumn,  = st.columns(1)
@@ -36,12 +36,9 @@ def main():
         
                     for i in range(len(st.session_state["generated"])-1, -1, -1):
                         question = st.session_state["past"][i]
-                        st.markdown(f"<h3 style='text-align: center; color: black;'> ........................................................................</h3>", unsafe_allow_html=True)
-                        st.markdown(f"<h4 style='text-align: center; color: black;'> Question:</h4>", unsafe_allow_html=True)
-                        st.markdown(f"<h4 style=' color: red;'>  {question}</h4>", unsafe_allow_html=True)
+                        st.markdown(f"<div div style='text-align: right; background-color: #EFEFEF; padding: 10px; border-radius: 10px;'><h6 >  {question}</h6></div>", unsafe_allow_html=True)
                         chat_message = st.session_state["generated"][i]["output_text"]
-                        st.markdown(f"<h4 style='text-align: center; color: black;'> Anwser:</h4>", unsafe_allow_html=True)
-                        st.markdown(f"<h4 style=' color: green;'>  {chat_message}</h4>", unsafe_allow_html=True)
+                        st.markdown(f"<div style='text-align: left; background-color: #D3E5FA; padding: 10px; border-radius: 10px;'><h6>  {chat_message}</h6></div>", unsafe_allow_html=True)
 
 
 

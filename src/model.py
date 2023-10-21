@@ -9,13 +9,21 @@ from langchain import PromptTemplate
 import sys
 from src.logger import logging
 from src.exception import CustomException
+import os
+from dotenv import load_dotenv
+load_dotenv()
+HFapi_key = os.getenv('HF_API')
+
+
 
 
 class LLMmodel(object):
     def __init__(self,data):
         self.document = data
+
         self.repo_id = 'declare-lab/flan-alpaca-large'
-        self.HF_API_TOKEN = 
+        self.HF_API_TOKEN = HFapi_key
+        
         self.llm = None
         self.chain = None
         

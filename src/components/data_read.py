@@ -12,6 +12,7 @@ from PyPDF2 import PdfReader
 st.set_page_config(initial_sidebar_state="collapsed")
 from streamlit_extras.stylable_container import *
 from streamlit_extras.switch_page_button import switch_page
+import streamlit_scrollable_textbox as stx
 
 class DataRead:
     def __init__(self):
@@ -51,7 +52,7 @@ if __name__=="__main__":
     # obj=DataRead()
     # obj.getdata()
 
-    st.title("PDF Data Reader")
+    st.title("PDF Data bot")
     st.write("Upload a PDF file to read its content.")
 
     obj = DataRead()
@@ -82,12 +83,9 @@ if __name__=="__main__":
         if document:
             st.success("Data read successfully.")
             st.write("PDF Content:")
-            st.write(document)
-            st.write("after split")
-            st.write(llm_model_instance)
-            # obj.save_document(document,'temp.pdf')
+            stx.scrollableTextbox(document,height = 300)
 
-            if st.button("Go to Data Ask Page"):
+            if st.button("Go to chat page"):
                 switch_page("data_ask")
             
     

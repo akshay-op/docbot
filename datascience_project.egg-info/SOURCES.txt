@@ -11,6 +11,3 @@ src/logger.py
 src/model.py
 src/components/__init__.py
 src/components/data_read.py
-src/pipeline/__init__.py
-src/pipeline/predict.py
-src/pipeline/train.py
