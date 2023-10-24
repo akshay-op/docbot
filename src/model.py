@@ -1,8 +1,6 @@
-from langchain import document_loaders as dl
 from langchain import text_splitter as ts
 from langchain import embeddings
 from langchain import vectorstores as vs
-from langchain import retrievers
 from langchain.chains.question_answering import load_qa_chain
 from langchain import HuggingFaceHub
 from langchain import PromptTemplate
